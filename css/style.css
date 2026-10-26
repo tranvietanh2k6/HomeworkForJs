@@ -1,0 +1,65 @@
+/* Cài đặt chung cho toàn trang */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: #e8f5e9; /* Màu xanh lá nhạt tạo cảm giác khu vườn */
+    padding: 20px;
+    color: #2e7d32;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+/* Khung hiển thị ảnh lớn */
+#main-container {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto 30px;
+    background-color: #fff;
+    background-image: url(''); /* Sẽ được JS thay đổi */
+    background-size: cover;
+    background-position: center;
+    border: 5px solid #81c784; /* Viền xanh lá */
+    border-radius: 15px; /* Bo góc mềm mại */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-image 0.4s ease-in-out;
+}
+
+/* Văn bản bên trong khung lớn */
+#main-text {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+/* Danh sách ảnh nhỏ */
+.thumbnail-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Định dạng ảnh nhỏ */
+.thumbnail {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    border: 3px solid #a5d6a7;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+/* Hiệu ứng khi đưa chuột vào ảnh nhỏ */
+.thumbnail:hover {
+    transform: scale(1.1); /* Phóng to nhẹ */
+    border-color: #2e7d32; /* Đổi màu viền đậm hơn */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
