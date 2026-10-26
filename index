@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư viện ảnh tương tác</title>
+    <style>
+        /* Cấu trúc cơ bản cho thư viện ảnh */
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        /* Div chính hiển thị ảnh lớn */
+        #main-container {
+            width: 500px;
+            height: 350px;
+            margin: 0 auto 20px;
+            background-color: #f0f0f0;
+            background-image: url(''); /* Ban đầu để trống */
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            font-size: 24px;
+            font-weight: bold;
+            transition: background-image 0.3s ease; /* Hiệu ứng chuyển ảnh mượt mà */
+        }
+        
+        /* Danh sách các ảnh nhỏ */
+        .thumbnail-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        /* Định dạng ảnh nhỏ */
+        .thumbnail {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        
+        /* Hiệu ứng khi di chuột vào ảnh nhỏ */
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bộ sưu tập ảnh</h1>
+    
+    <!-- Phần tử trung tâm sẽ thay đổi khi bạn di chuột -->
+    <div id="main-container">
+        <span id="main-text">Di chuột qua một hình ảnh bên dưới để hiển thị ở đây.</span>
+    </div>
+
+    <!-- Danh sách ảnh thu nhỏ -->
+    <div class="thumbnail-list">
+        <!-- Gắn sự kiện onmouseover (khi di chuột vào) và onmouseout (khi di chuột ra) -->
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400" 
+             alt="Chú chó đeo băng đô" 
+             class="thumbnail" 
+             onmouseover="update(this)" 
+             onmouseout="undo()">
+        
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400" 
+             alt="Chú chó đang ngủ" 
+             class="thumbnail" 
+             onmouseover="update(this)" 
+             onmouseout="undo()">
+        
+        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400" 
+             alt="Chú chó con dễ thương" 
+             class="thumbnail" 
+             onmouseover="update(this)" 
+             onmouseout="undo()">
+    </div>
+
+    <script>
+        // Lấy các phần tử cần thiết từ DOM
+        const mainDiv = document.getElementById('main-container');
+        const mainText = document.getElementById('main-text');
+        
+        // Lưu lại nội dung văn bản và hình nền ban đầu để khôi phục (cho hàm undo)
+        const originalText = mainText.innerHTML;
+        const originalBg = mainDiv.style.backgroundImage;
+
+        /**
+         * Hàm update: Được gọi khi di chuột vào ảnh thu nhỏ.
+         * Cập nhật hình nền và văn bản của div chính dựa trên ảnh được chọn.
+         * @param {HTMLElement} previewPic - Phần tử ảnh đang được di chuột.
+         */
+        function update(previewPic) {
+            // Gợi ý của bài tập: Dùng console.log để kiểm tra xem sự kiện có kích hoạt không
+            console.log("Đã di chuột vào:", previewPic.alt); 
+            
+            // 1. Cập nhật văn bản bên trong div bằng thuộc tính alt của ảnh
+            mainText.innerHTML = previewPic.alt;
+            
+            // 2. Cập nhật hình nền của div bằng thuộc tính src của ảnh
+            mainDiv.style.backgroundImage = `url('${previewPic.src}')`;
+        }
+
+        /**
+         * Hàm undo: Được gọi khi di chuột ra khỏi ảnh thu nhỏ.
+         * Khôi phục lại trạng thái ban đầu của div chính.
+         */
+        function undo() {
+            // Khôi phục văn bản gốc
+            mainText.innerHTML = originalText;
+            
+            // Khôi phục hình nền gốc (ban đầu là rỗng)
+            mainDiv.style.backgroundImage = originalBg;
+        }
+    </script>
+</body>
+</html>
